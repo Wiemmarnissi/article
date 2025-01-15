@@ -13,6 +13,13 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ArticleController extends AbstractController{
 
+    #[Route('/logout', name:'app_logout')]
+    public function logout(): Response
+    {
+        // Symfony se charge de la déconnexion automatiquement
+        // Nous pouvons rediriger l'utilisateur vers une autre page après la déconnexion
+        return $this->redirectToRoute('app_login');
+    }
     private string $imagesDirectory;
 
     public function __construct(#[Autowire('%images_directory%')] string $imagesDirectory)

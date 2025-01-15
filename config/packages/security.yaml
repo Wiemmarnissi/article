@@ -21,8 +21,11 @@ security:
                 login_path: app_login
                 check_path: app_login
                 default_target_path: app_article 
-                username_parameter: _email 
-                password_parameter: _password
+                username_parameter: "_username" # Assurez-vous que le paramètre est _username
+                password_parameter: "_password" # Assurez-vous que le paramètre est _password
+            logout:
+                path: app_logout
+                target: app_login  
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
