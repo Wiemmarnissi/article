@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <h1 class="text-center mb-4">Create a New Article</h1>
+                
+                <div class="card shadow">
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                        
+                        {# Titre #}
+                        <div class="mb-3">
+                            {{ form_label(form.titre, 'Title', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Enter the title'}}) }}
+                            {{ form_errors(form.titre) }}
+                        </div>
+                        
+                        {# Description courte #}
+                        <div class="mb-3">
+                            {{ form_label(form.discription, 'Short Description', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.discription, {'attr': {'class': 'form-control', 'placeholder': 'Enter a short description'}}) }}
+                            {{ form_errors(form.discription) }}
+                        </div>
+                        
+                        {# Summernote pour description détaillée #}
+                        <div class="mb-3">
+                            <label for="article_discriptiondetaille" class="form-label">Detailed Description</label>
+                            {{ form_widget(form.discriptiondetaille, {'attr': {'class': 'summernote'}}) }}
+                            {{ form_errors(form.discriptiondetaille) }}
+                        </div>
+                        
+                        {# Image #}
+                        <div class="mb-3">
+                            {{ form_label(form.image, 'Upload Image', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.image) }}
+                        </div>
+                        
+                        {# Bouton Enregistrer #}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary px-4">Save</button>
+                        </div>
+                        
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {# Inclure Summernote et jQuery #}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            // Initialiser Summernote
+            $('.summernote').summernote({
+                height: 300,
+                placeholder: 'Enter a detailed description here...',
+            });
+
+            // Assigner le contenu Summernote à la textarea
+            $('form').on('submit', function () {
+                const content = $('.summernote').summernote('code');
+                $('textarea[name="article[discriptiondetaille]"]').val(content);
+            });
+        });
+    </script>
+{% endblock %}

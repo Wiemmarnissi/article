@@ -1,0 +1,11 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: My App
+            description: This is an awesome app!
+            version: 1.0.0
+    areas: # Configuration des zones documentées
+        default: # Nom de la zone (par défaut)
+            path_patterns: # Les routes à inclure dans la documentation
+                - ^/api
+            host_patterns: [] # Vous pouvez inclure des hôtes spécifiques, ou laisser vide
